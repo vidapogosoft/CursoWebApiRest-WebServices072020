@@ -13,6 +13,11 @@ namespace DemoDevWebApi
         {
             // Configuración y servicios de API web
 
+            //Formateo salida en Json
+            //var json = config.Formatters.JsonFormatter;
+            //json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            //config.Formatters.Remove(config.Formatters.XmlFormatter);
+
             //Habilitando Cors
             var urlPermitidas = new EnableCorsAttribute("*"
                                                 ,"*","*");
