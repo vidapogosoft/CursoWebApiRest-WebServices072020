@@ -34,7 +34,7 @@ Module Conexion_ODBC
 
         cnx = "
             
-        Driver ={IBM INFORMIX ODBC DRIVER};
+        Driver = {IBM INFORMIX ODBC DRIVER};
         Database = miBD;
         Host = MI IP desde donde me estoy conectando;
         Server = miServidor;
