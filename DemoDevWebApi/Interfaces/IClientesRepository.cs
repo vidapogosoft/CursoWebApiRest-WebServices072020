@@ -15,7 +15,10 @@ namespace DemoDevWebApi.Interfaces
         
         IEnumerable<ModeloDatos.Entidades.Clientes> GetClienteByIdentificacion(string Identificacion);
 
-        //void PostCliente(ClsClientes NewCiente);
+        void PostCliente(ModeloDatos.Clientes NewCiente);
 
+        void PutCliente(ModeloDatos.Clientes UpdCiente);
+
+        void DeleteCliente(ModeloDatos.Clientes UpdCiente);
     }
 }

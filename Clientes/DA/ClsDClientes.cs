@@ -86,6 +86,28 @@ namespace Clientes.DA
             }
         }
 
+        public void UpdateCliente(ModeloDatos.Clientes UpdCliente)
+        {
+            using (DBApirestEntities ctx = new DBApirestEntities())
+            {
+
+                var cliente = ctx.Clientes.Where(a => a.IdCliente == UpdCliente.IdCliente).ToList();
+
+                if (cliente.Count > 0)
+                {
+                    foreach (ModeloDatos.Clientes clienteModificar in cliente)
+                    {
+                        clienteModificar.Nombres = UpdCliente.Nombres;
+                        clienteModificar.Apellidos = UpdCliente.Apellidos;
+                        clienteModificar.NombresCompletos = UpdCliente.Nombres + " " + UpdCliente.Apellidos;
+                        clienteModificar.FechaRegistro = DateTime.Now;
+
+                        ctx.SaveChanges();
+                    }
+                }
+            }
+        }
+
         public void ActualizaNombresClientes(int IdCliente,string Nombres, string Apellidos)
         {
             using (DBApirestEntities ctx = new DBApirestEntities())
@@ -107,6 +129,14 @@ namespace Clientes.DA
             }
         }
 
+        public void DelRegistroCliente(ModeloDatos.Clientes DelCliente)
+        {
+            using (DBApirestEntities ctx = new DBApirestEntities())
+            {
+                ctx.Clientes.Remove(DelCliente);
+                ctx.SaveChanges();
+            }
+        }
 
     }
 }

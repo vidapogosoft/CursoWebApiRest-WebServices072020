@@ -36,11 +36,19 @@ namespace DemoDevWebApi.Services
         }
 
 
+        public void PostCliente(ModeloDatos.Clientes NewCiente)
+        {
+            clsBClientes.RegistroCliente(NewCiente);
+        }
 
-        //public void PostCliente(ClsClientes NewCiente)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void PutCliente(ModeloDatos.Clientes UpdCiente)
+        {
+            clsBClientes.UpdateCliente(UpdCiente);
+        }
 
+        public void DeleteCliente(ModeloDatos.Clientes DelCliente)
+        {
+            clsBClientes.DeleteClientes(DelCliente);
+        }
     }
 }

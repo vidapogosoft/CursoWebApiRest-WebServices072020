@@ -43,6 +43,20 @@ namespace Clientes.BL
             return grabado;
         }
 
+        public int UpdateCliente(ModeloDatos.Clientes UpdCliente)
+        {
+            int grabado = 0;
+
+            using (TransactionScope trans = new TransactionScope())
+            {
+                clsDAClientes.UpdateCliente(UpdCliente);
+                trans.Complete();
+                grabado = 1;
+            }
+
+            return grabado;
+        }
+
         public int ActualizaNombresClientes(int IdCliente, string Nombres, string Apellidos)
         {
             int grabado = 0;
@@ -56,6 +70,20 @@ namespace Clientes.BL
 
             return grabado;
         }
-     
+
+        public int DeleteClientes(ModeloDatos.Clientes DelCliente)
+        {
+            int grabado = 0;
+
+            using (TransactionScope trans = new TransactionScope())
+            {
+                clsDAClientes.DelRegistroCliente(DelCliente);
+                trans.Complete();
+                grabado = 1;
+            }
+
+            return grabado;
+        }
+
     }
 }

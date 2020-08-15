@@ -8,6 +8,8 @@ using System.Web.Http;
 using DemoDevWebApi.Interfaces;
 using DemoDevWebApi.Services;
 
+using ModeloDatos;
+
 namespace DemoDevWebApi.Controllers
 {
 
@@ -40,18 +42,51 @@ namespace DemoDevWebApi.Controllers
         //}
 
         // POST: api/Clientes2
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public IHttpActionResult RegistroCliente([FromBody]ModeloDatos.Clientes NewCliente)
         {
+            if (ModelState.IsValid)
+            {
+                _ClientesRepository.PostCliente(NewCliente);
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT: api/Clientes2/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public IHttpActionResult ActualizaCliente([FromBody]ModeloDatos.Clientes UpdCliente)
         {
+            if (ModelState.IsValid)
+            {
+                _ClientesRepository.PutCliente(UpdCliente);
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/Clientes2/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult DeleteCliente([FromBody] ModeloDatos.Clientes DelCliente)
         {
+            if (ModelState.IsValid)
+            {
+                _ClientesRepository.DeleteCliente(DelCliente);
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
