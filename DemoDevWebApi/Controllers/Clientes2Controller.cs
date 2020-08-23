@@ -17,22 +17,52 @@ namespace DemoDevWebApi.Controllers
     {
         private readonly IClientesRepository _ClientesRepository = new ClientesRepository();
 
+        //Cuando se comienza a aplicar routes se debe en adelante especificar los route para acceder a los verbos HTTP
+
         // GET: api/Clientes2
         [HttpGet]
+        [Route("api/clientes2")]
         public IHttpActionResult GetClientes()
         {
             return Ok(_ClientesRepository.GetClientes);
         }
 
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        [HttpGet]
+        [Route("api/clientes2/direcciones")]
+        public IHttpActionResult GetClientes2()
+        {
+            return Ok(_ClientesRepository.GetClientes);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetClientesDirecciones(string IdCliente)
+        {
+            return Ok(_ClientesRepository.GetClienteByIdentificacion(IdCliente));
+        }
+
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
 
         // GET: api/Clientes2/5
         [HttpGet]
         public IHttpActionResult GetClientes(string id)
         {
+            return Ok(_ClientesRepository.GetClienteByIdentificacion(id));
+        }
+
+        [HttpGet]
+        public IHttpActionResult ConsultaClienteCedula(string Cedula)
+        {
+            return Ok(_ClientesRepository.GetClienteByIdentificacion(Cedula));
+        }
+
+        // GET: api/Clientes2/5
+        [HttpGet]
+        public IHttpActionResult GetClientes2(string id, int IdCliente)
+        {
+            var RecibeIdCliente = IdCliente;
             return Ok(_ClientesRepository.GetClienteByIdentificacion(id));
         }
 

@@ -13,6 +13,10 @@ namespace ApiRestNetCore.Interfaces
 
         IEnumerable<Clientes> ListClientes { get;  }
 
+        IEnumerable<Clientes> Cliente(int IdCliente);
+
         void RegistroClientes(Clientes NewCliente);
+
+        void UpdateRegistro(Clientes EditCliente);
     }
 }
