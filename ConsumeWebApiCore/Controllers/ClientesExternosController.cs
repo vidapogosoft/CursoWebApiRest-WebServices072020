@@ -51,13 +51,14 @@ namespace ConsumeWebApiCore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ClientesExternos Cliente)
+        public ActionResult Create(ClientesExternos NewCliente)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUrl);
 
-                var PostTask = client.PostAsJsonAsync<ClientesExternos>("clientes", Cliente);
+                //debo colocar el nombre del controller a aplicar el verbo post
+                var PostTask = client.PostAsJsonAsync<ClientesExternos>("clientes", NewCliente);
                 PostTask.Wait();
 
                 var result = PostTask.Result;
@@ -68,7 +69,7 @@ namespace ConsumeWebApiCore.Controllers
                 }
             }
             ModelState.AddModelError(string.Empty,"Error en grabar registro");
-            return View(Cliente);
+            return View(NewCliente);
         }
 
     }

@@ -12,10 +12,7 @@ namespace ConsumeWebApiCore.Models
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string NombresCompletos { get; set; }
-        public DateTime? FechaRegistro
-        {
-            get; set;
+        public DateTime? FechaRegistro{ get; set; }
 
-        }
     }
 }
