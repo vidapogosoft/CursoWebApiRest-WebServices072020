@@ -30,6 +30,7 @@ namespace DemoDevWebApi
             // nueva route  le ponemso de nombre direcciones
             //cuando se lo llame desde el browser cleinte sera http://localhost:19272/api/midireccion/0919172551001
 
+
             config.Routes.MapHttpRoute(
                 name: "direcciones",
                 routeTemplate: "api/midireccion/{IdCliente}",
@@ -41,6 +42,7 @@ namespace DemoDevWebApi
                 routeTemplate: "api/consultacedula/{Cedula}",
                 defaults: new { controller = "clientes2", Cedula = RouteParameter.Optional }
             );
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

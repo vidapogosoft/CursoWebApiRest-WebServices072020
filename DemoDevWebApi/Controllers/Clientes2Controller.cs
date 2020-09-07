@@ -8,7 +8,6 @@ using System.Web.Http;
 using DemoDevWebApi.Interfaces;
 using DemoDevWebApi.Services;
 
-using ModeloDatos;
 
 namespace DemoDevWebApi.Controllers
 {
