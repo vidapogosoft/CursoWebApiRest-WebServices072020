@@ -72,5 +72,96 @@ namespace ConsumeWebApiCore.Controllers
             return View(NewCliente);
         }
 
+
+        public ActionResult Edit(int id)
+        {
+            ClientesExternos clientes = null;
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri(BaseUrl);
+
+                var responseTask = client.GetAsync("clientes/" + id.ToString());
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<ClientesExternos>();
+                    readTask.Wait();
+                    clientes = readTask.Result;
+                }
+
+            }
+            return View(clientes);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ClientesExternos EditCliente)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+
+                
+                var PutTask = client.PutAsJsonAsync<ClientesExternos>("clientes", EditCliente);
+                PutTask.Wait();
+
+                var result = PutTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            ModelState.AddModelError(string.Empty, "Error en actualizar registro");
+            return View(EditCliente);
+        }
+
+
+        public ActionResult Delete(int id)
+        {
+            ClientesExternos clientes = null;
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri(BaseUrl);
+
+                var responseTask = client.GetAsync("clientes/" + id.ToString());
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<ClientesExternos>();
+                    readTask.Wait();
+                    clientes = readTask.Result;
+                }
+
+            }
+            return View(clientes);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(ClientesExternos EditCliente, int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+
+                var DeltTask = client.DeleteAsync("clientes/" + id.ToString());
+                DeltTask.Wait();
+
+                var result = DeltTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            ModelState.AddModelError(string.Empty, "Error en actualizar registro");
+            return View(EditCliente);
+        }
+
     }
 }

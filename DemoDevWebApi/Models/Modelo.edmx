@@ -16,6 +16,9 @@
           <Property Name="NombresCompletos" Type="varchar" MaxLength="200" />
           <Property Name="FechaRegistro" Type="datetime" />
         </EntityType>
+        <Function Name="GetDatos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Param1" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DBApirestModelStoreContainer">
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -36,7 +39,14 @@
         </EntityType>
         <EntityContainer Name="DBApirestEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <FunctionImport Name="GetDatos" ReturnType="Collection(DBApirestModel.GetDatos_Result)">
+            <Parameter Name="Param1" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetDatos_Result">
+          <Property Type="String" Name="Campo1" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="Campo2" Nullable="false" MaxLength="7" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -55,6 +65,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetDatos" FunctionName="DBApirestModel.Store.GetDatos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBApirestModel.GetDatos_Result">
+                <ScalarProperty Name="Campo1" ColumnName="Campo1" />
+                <ScalarProperty Name="Campo2" ColumnName="Campo2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

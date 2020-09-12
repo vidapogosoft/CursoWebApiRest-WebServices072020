@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.FechaRegistro)
         </td>
         <td>
-            @Html.ActionLink("Editar Datos", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Editar Datos", "Edit", new { id= item.IdCliente }) |
             @Html.ActionLink("Detalle", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Borrar", "Delete", new { id = item.IdCliente })
         </td>
     </tr>
 }

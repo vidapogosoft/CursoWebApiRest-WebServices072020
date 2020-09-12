@@ -12,6 +12,8 @@ namespace DemoDevWebApi.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBApirestEntities : DbContext
     {
@@ -26,5 +28,14 @@ namespace DemoDevWebApi.Models
         }
     
         public virtual DbSet<Clientes> Clientes { get; set; }
+    
+        public virtual ObjectResult<GetDatos_Result> GetDatos(Nullable<int> param1)
+        {
+            var param1Parameter = param1.HasValue ?
+                new ObjectParameter("Param1", param1) :
+                new ObjectParameter("Param1", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDatos_Result>("GetDatos", param1Parameter);
+        }
     }
 }

@@ -69,19 +69,32 @@ namespace ApiRestNetCore.Services
         {
             using (var context = new DBApirestContext())
             {
+                    using (var contextTransaction = context.Database.BeginTransaction())
+                    {
 
-                var cliente = context.Clientes.FirstOrDefault(a=> a.IdCliente == EditCliente.IdCliente);
+                    try
+                    {
+                        var cliente = context.Clientes.FirstOrDefault(a => a.IdCliente == EditCliente.IdCliente);
 
-                if (cliente != null)
-                {
-                    cliente.Identificacion = EditCliente.Identificacion;
-                    cliente.Apellidos = EditCliente.Apellidos;
-                    cliente.Nombres = EditCliente.Nombres;
-                    cliente.FechaRegistro = DateTime.Now;
+                        if (cliente != null)
+                        {
+                            cliente.Identificacion = EditCliente.Identificacion;
+                            cliente.Apellidos = EditCliente.Apellidos;
+                            cliente.Nombres = EditCliente.Nombres;
+                            cliente.FechaRegistro = DateTime.Now;
 
-                    context.Update(cliente);
-                    context.SaveChanges();
-                }
+                            context.Update(cliente);
+                            context.SaveChanges();
+                            contextTransaction.Commit();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var mes = ex.Message;
+                        contextTransaction.Rollback();
+                    }
+
+                    }
 
             }
 
