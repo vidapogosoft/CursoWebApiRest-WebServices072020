@@ -40,6 +40,9 @@ namespace ConsumeWebApiCore.Controllers
 
                 }
 
+                //METODO QUE CONUSLTE DIRECCIONES
+                
+
             }
 
              return View(ClientesInfo);
@@ -149,7 +152,8 @@ namespace ConsumeWebApiCore.Controllers
             {
                 client.BaseAddress = new Uri(BaseUrl);
 
-                var DeltTask = client.DeleteAsync("clientes/" + id.ToString());
+                //var DeltTask = client.DeleteAsync("clientes/" + id.ToString());
+                var DeltTask = client.DeleteAsync("clientes/" + EditCliente.IdCliente.ToString());
                 DeltTask.Wait();
 
                 var result = DeltTask.Result;
